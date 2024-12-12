@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login</title>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : 'YOUR_APP_ID', // Replace with your Facebook App ID
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v15.0'
+            });
+
+            FB.AppEvents.logPageView();
+        };
+
+        // Function to handle login
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    // The user is logged in and authenticated
+                    console.log('Logged in:', response);
+                    alert('Successfully logged in');
+                    // You can now use the response to fetch user data or send it to the server
+                } else {
+                    // The user is not logged in
+                    alert('Login failed');
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Facebook Login</h1>
+
+    <!-- Facebook login button -->
+    <fb:login-button 
+        scope="public_profile,email" 
+        onlogin="checkLoginState();">
+    </fb:login-button>
+
+    <script>
+        // This script will load the Facebook SDK asynchronously
+    </script>
+</body>
+</html>
