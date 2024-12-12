@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Facebook Login</title>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
+
     <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '1334731971047316',
-                cookie     : true,
-                xfbml      : true,
-                version    : 'v21.0'
-            });
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: "1334731971047316",
+          cookie: true,
+          xfbml: true,
+          version: "v21.0",
+        });
 
-            FB.AppEvents.logPageView();
-        };
+        FB.AppEvents.logPageView();
+      };
 
-        function checkLoginState() {
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    console.log('Logged in:', response);
-                    alert('Successfully logged in');
-                } else {
-                    alert('Login failed');
-                }
-            });
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
         }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Facebook Login</h1>
 
-    <fb:login-button 
-        scope="public_profile,email" 
-        onlogin="checkLoginState();">
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
     </fb:login-button>
 
     <script>
-        // This script will load the Facebook SDK asynchronously
+      FB.getLoginStatus(function (response) {
+        statusChangeCallback(response);
+      });
     </script>
-</body>
+  </body>
 </html>

@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.sendFile("./public/index.html");
+  res.send("Hello, World!");
 });
 
 app.post("/login", async (req, res) => {
