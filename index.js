@@ -22,7 +22,6 @@ app.get('/auth/facebook/callback', async (req, res) => {
         const response = await axios.get(`https://graph.facebook.com/me?access_token=${accessToken}&fields=id,name,email`);
         const userData = response.data;
 
-        // Redirect to the success page with user data as query parameters
         res.redirect(`/public/success.html?name=${encodeURIComponent(userData.name)}&email=${encodeURIComponent(userData.email)}`);
     } catch (error) {
         console.error('Error fetching data from Facebook:', error);
