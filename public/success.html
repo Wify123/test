@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .user-info {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 300px;
+            background: #f9f9f9;
+            text-align: left;
+        }
+        .user-info p {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login Successful</h1>
+    <div class="user-info">
+        <h2>User Details</h2>
+        <p><strong>Name:</strong> <span id="user-name"></span></p>
+        <p><strong>Email:</strong> <span id="user-email"></span></p>
+    </div>
+    <a href="/">Go Back to Home</a>
+
+    <script>
+        // Fetch user data passed from the server (assumes query parameters or JSON payload)
+        // Example: `/success.html?name=John Doe&email=john.doe@example.com`
+        const urlParams = new URLSearchParams(window.location.search);
+        const userName = urlParams.get('name');
+        const userEmail = urlParams.get('email');
+
+        // Update the HTML with user information
+        document.getElementById('user-name').textContent = userName || 'Unknown';
+        document.getElementById('user-email').textContent = userEmail || 'Unknown';
+    </script>
+</body>
+</html>
