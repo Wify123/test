@@ -20,7 +20,7 @@ app.get('/auth/facebook/callback', async (req, res) => {
         const response = await axios.get(`https://graph.facebook.com/me?access_token=${accessToken}&fields=id,name,email`);
         const userData = response.data;
 
-        res.json(userData);
+        res.json("welcome "+userData.name);
     } catch (error) {
         console.error('Error fetching data from Facebook:', error);
         res.status(500).send('Error fetching data from Facebook');
