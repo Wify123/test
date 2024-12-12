@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Facebook Login</title>
-    <script
-      async
-      defer
-      crossorigin="anonymous"
-      src="https://connect.facebook.net/en_US/sdk.js"
-    ></script>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login Example</title>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
-      window.fbAsyncInit = function () {
-        FB.init({
-          appId: "1334731971047316",
-          cookie: true,
-          xfbml: true,
-          version: "v21.0",
-        });
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1334731971047316',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v21.0'
+            });
 
-        FB.AppEvents.logPageView();
-      };
+            FB.AppEvents.logPageView();
+        };
 
-      (function (d, s, id) {
-        var js,
-          fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-          return;
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    console.log('Logged in:', response);
+                    window.location.href = 'https://nocodebi.vercel.app/auth/facebook/callback?access_token=' + response.authResponse.accessToken;
+                } else {
+                    alert('Login failed');
+                }
+            });
         }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      })(document, "script", "facebook-jssdk");
     </script>
-  </head>
-  <body>
+</head>
+<body>
     <h1>Facebook Login</h1>
+    <p>Click the button below to log in with Facebook:</p>
 
-    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    <fb:login-button 
+        scope="public_profile,email" 
+        onlogin="checkLoginState();">
     </fb:login-button>
 
     <script>
-      FB.getLoginStatus(function (response) {
-        statusChangeCallback(response);
-      });
     </script>
-  </body>
+</body>
 </html>
