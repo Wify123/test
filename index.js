@@ -5,9 +5,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  console.log(path.join(__dirname, "public", "index.html"));
-  
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile("./public/index.html");
 });
 
 app.post("/login", async (req, res) => {
