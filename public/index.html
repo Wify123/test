@@ -21,7 +21,7 @@
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
                     console.log('Logged in:', response);
-                    window.location.href = 'https://nocodebi.vercel.app/auth/facebook/callback?access_token=' + response.authResponse.accessToken;
+                    // window.location.href = 'https://nocodebi.vercel.app/auth/facebook/callback?access_token=' + response.authResponse.accessToken;
                 } else {
                     alert('Login failed');
                 }
