@@ -7,6 +7,7 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
         window.fbAsyncInit = function() {
+            console.log('Initializing Facebook SDK');
             FB.init({
                 appId      : '1334731971047316',
                 cookie     : true,
@@ -15,10 +16,13 @@
             });
 
             FB.AppEvents.logPageView();
+            console.log('Facebook SDK initialized');
         };
 
         function checkLoginState() {
+            console.log('Checking login state');
             FB.getLoginStatus(function(response) {
+                console.log('Login status response:', response);
                 if (response.status === 'connected') {
                     console.log('Logged in:', response);
                     window.location.href = 'https://nocodebi.vercel.app/auth/facebook/callback?access_token=' + response.authResponse.accessToken;
@@ -32,13 +36,6 @@
 <body>
     <h1>Facebook Login</h1>
     <p>Click the button below to log in with Facebook:</p>
-
-    <fb:login-button 
-        scope="public_profile,email" 
-        onlogin="checkLoginState();">
-    </fb:login-button>
-
-    <script>
-    </script>
+    <button onclick="checkLoginState()">Login with Facebook</button>
 </body>
 </html>

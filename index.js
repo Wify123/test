@@ -10,22 +10,24 @@ app.get('/', (req, res) => {
 });
 
 app.get('/auth/facebook/callback', async (req, res) => {
-    
     const accessToken = req.query.access_token;
 
     if (!accessToken) {
+        console.log('Missing access token');
         return res.status(400).send('Missing access token');
     }
 
     try {
+        console.log('Fetching data from Facebook with access token:', accessToken);
         const response = await axios.get(`https://graph.facebook.com/me?access_token=${accessToken}&fields=id,name,email`);
         const userData = response.data;
 
-        localStorage.setItem('userData', JSON.stringify(userData));
+        // Store user data in a session or database instead of localStorage
+        // Example: req.session.userData = userData;
 
-        console.log(userData);
+        console.log('User data fetched from Facebook:', userData);
 
-        return res.send(`Login Successful, Welcome ${ userData.name} with email : ${userData.email} userData : ${JSON.stringify(userData)}`);
+        return res.send(`Login Successful, Welcome ${userData.name} with email: ${userData.email} userData: ${JSON.stringify(userData)}`);
     } catch (error) {
         console.error('Error fetching data from Facebook:', error);
         res.status(500).send('Error fetching data from Facebook');
@@ -34,5 +36,5 @@ app.get('/auth/facebook/callback', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
