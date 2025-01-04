@@ -6,6 +6,7 @@
     <title>Facebook Login Example</title>
   </head>
   <body>
+
     <!-- SDK loading -->
     <script
       async
@@ -24,6 +25,17 @@
           version: "v21.0",
         });
       };
+
+      function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                console.log('Logged in:', response);
+                window.location.href = 'https://nocodebi.vercel.app/auth/facebook/callback?access_token=' + response.authResponse.accessToken;
+            } else {
+                alert('Login failed');
+            }
+        });
+      }
 
       // Session logging message event listener
       window.addEventListener("message", (event) => {
@@ -67,9 +79,37 @@
       };
     </script>
 
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1334731971047316',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v21.0'
+            });
+
+            FB.AppEvents.logPageView();
+        };
+
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    console.log('Logged in:', response);
+                    localStorage.setItem('fb_access_token', JSON.stringify(response.authResponse.accessToken));
+                    setTimeout(() => {
+                      window.location.href = 'https://nocodebi.vercel.app/auth/facebook/callback?access_token=' + response.authResponse.accessToken;
+                    }, 10000);
+                } else {
+                    alert('Login failed');
+                }
+            });
+        }
+    </script>
+
     <!-- Launch button  -->
     <button
-      onclick="fbLoginCallback()"
+      onclick="checkLoginState()"
       style="
         background-color: #1877f2;
         border: 0;

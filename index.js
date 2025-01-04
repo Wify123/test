@@ -21,6 +21,8 @@ app.get('/auth/facebook/callback', async (req, res) => {
         const response = await axios.get(`https://graph.facebook.com/me?access_token=${accessToken}&fields=id,name,email`);
         const userData = response.data;
 
+        localStorage.setItem('userData', JSON.stringify(userData));
+
         console.log(userData);
 
         return res.send(`Login Successful, Welcome ${ userData.name} with email : ${userData.email} userData : ${JSON.stringify(userData)}`);
