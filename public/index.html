@@ -46,10 +46,9 @@
       const fbLoginCallback = (response) => {
         if (response.authResponse) {
           const code = response.authResponse.code;
-          console.table(code); // remove after testing
-          // your code goes here
+          console.log("response: ", code);
         } else {
-          console.log("response: ", response); 
+          console.log("response: ", response);
         }
       };
 
