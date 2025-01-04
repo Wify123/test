@@ -23,7 +23,7 @@ app.get('/auth/facebook/callback', async (req, res) => {
 
         console.log(userData);
 
-        return res.send(`Login Successful, Welcome ${ userData.name} with email : ${userData.email} userData : ${JSON.stringify(userData)} data : ${localStorage.getItem('res')}`);
+        return res.send(`Login Successful, Welcome ${ userData.name} with email : ${userData.email} userData : ${JSON.stringify(userData)}`);
     } catch (error) {
         console.error('Error fetching data from Facebook:', error);
         res.status(500).send('Error fetching data from Facebook');
