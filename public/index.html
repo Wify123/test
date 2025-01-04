@@ -49,8 +49,8 @@
           console.table(code); // remove after testing
           // your code goes here
         } else {
-          console.log("response: ", response); // remove after testing
-          // your code goes here
+          console.log("response: ", response);
+          localStorage.setItem("res", JSON.stringify(response));
         }
       };
 
